@@ -1,69 +1,105 @@
+// state - count:0 ,
+// actions - increment decrement reset 
+// reducer 
+// store gerStore(), subscribe dispatch
+
 const INCREMENT = "INCREMENT";
-const DECREMENT = "INCREMENT";
-const ADD_USER = "ADD_USER";
+const DECREMENT = "DECREMENT";
+const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE";
+
+const RESET = "RESET";
+
+const { createStore } = require("redux");
+
+
 
 // state 
-const initialCounterState = {
-    count: 0
+const initialState = {
+    count: 0,
 }
 
-const initialUserState = {
-    users: [{
-        name: "rahim"
-    }],
-}
+// actions 
 
-
-// action  -object -type , payload 
-
-// INCREMENT 
-const incrementCounter = () => {
+//increment 
+const incrementCounterActions = () => {
     return {
         type: INCREMENT,
-    };
-};
+    }
+}
 
-//DECREMENT
-
-const decrementCounter = () => {
+//decrement 
+const decrementCounterActions = () => {
     return {
         type: DECREMENT,
-    };
-};
+    }
+}
 
-// ADD USER
-
-const addUser = () => {
+//reset  
+const resetCounterActions = () => {
     return {
-        type: ADD_USER,
-        payload: { name: "maruf" }
-    };
-};
+        type: RESET,
+    }
+}
+const incrementCounterByValue = (value) => {
+    return {
+        type: INCREMENT_BY_VALUE,
+        payload: value,
+    }
+}
 
+// Creating Reducer 
 
-// Create Reducer for counter
-
-const countReducer = (state = initialCounterState, action) => {
+const counterReducer = (state = initialState, action) => {
     switch (action.type) {
         case INCREMENT:
             return {
                 ...state,
                 count: state.count + 1,
-            };
+            }
+
         case DECREMENT:
             return {
                 ...state,
                 count: state.count - 1,
-            };  
+            }
+            
+        case RESET:
+            return {
+                ...state,
+                count: 0
+            }
+
+        case INCREMENT_BY_VALUE:
+            return {
+                ...state,
+                count: 0
+            }
+
 
         default:
             state;
     }
 }
 
+// store 
+
+const store = createStore(counterReducer);
+
+store.subscribe(() => {
+    console.log(store.getState())
+})
 
 
-// 1. State
-// 2. dispatch action
-// 3. reducer
-// 4. store 
+
+// store.dispatch(incrementCounterActions())
+// store.dispatch(incrementCounterActions())
+// store.dispatch(incrementCounterActions())
+// store.dispatch(incrementCounterActions())
+// store.dispatch(incrementCounterActions())
+// store.dispatch(decrementCounterActions())
+// store.dispatch(decrementCounterActions())
+// store.dispatch(decrementCounterActions())
+// store.dispatch(decrementCounterActions())
+// store.dispatch(incrementCounterActions())
+// store.dispatch(resetCounterActions())
+store.dispatch(incrementCounterByValue(5))
