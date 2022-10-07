@@ -2,79 +2,65 @@
 // actions - increment decrement reset 
 // reducer 
 // store gerStore(), subscribe dispatch
-
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
-const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE";
-
-const RESET = "RESET";
-
 const { createStore } = require("redux");
+
+// const INCREMENT = "INCREMENT";
+// const DECREMENT = "DECREMENT";
+// const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE";
+
+const ADD_USER = "ADD_USER";
+
+// const RESET = "RESET";
+
 
 
 
 // state 
 const initialState = {
-    count: 0,
+    users: ['rahim'],
+    count: 1,
 }
 
 // actions 
 
 //increment 
-const incrementCounterActions = () => {
+const addUser = (user) => {
     return {
-        type: INCREMENT,
+        type: ADD_USER,
+        payload: user,
     }
 }
 
-//decrement 
-const decrementCounterActions = () => {
-    return {
-        type: DECREMENT,
-    }
-}
+//decrement  
+// const decrementCounterActions = () => {
+//     return {
+//         type: DECREMENT,
+//     }
+// }
 
-//reset  
-const resetCounterActions = () => {
-    return {
-        type: RESET,
-    }
-}
-const incrementCounterByValue = (value) => {
-    return {
-        type: INCREMENT_BY_VALUE,
-        payload: value,
-    }
-}
+// //reset  
+// const resetCounterActions = () => {
+//     return {
+//         type: RESET,
+//     }
+// }
+// const incrementCounterByValue = (value) => {
+//     return {
+//         type: INCREMENT_BY_VALUE,
+//         payload: value,
+//     }
+// }
 
 // Creating Reducer 
 
-const counterReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case INCREMENT:
+
+        case ADD_USER:
             return {
-                ...state,
+                users: [...state.users, action.payload],
                 count: state.count + 1,
             }
-
-        case DECREMENT:
-            return {
-                ...state,
-                count: state.count - 1,
-            }
-            
-        case RESET:
-            return {
-                ...state,
-                count: 0
-            }
-
-        case INCREMENT_BY_VALUE:
-            return {
-                ...state,
-                count: 0
-            }
-
 
         default:
             state;
@@ -83,7 +69,7 @@ const counterReducer = (state = initialState, action) => {
 
 // store 
 
-const store = createStore(counterReducer);
+const store = createStore(userReducer);
 
 store.subscribe(() => {
     console.log(store.getState())
@@ -91,15 +77,8 @@ store.subscribe(() => {
 
 
 
-// store.dispatch(incrementCounterActions())
-// store.dispatch(incrementCounterActions())
-// store.dispatch(incrementCounterActions())
-// store.dispatch(incrementCounterActions())
-// store.dispatch(incrementCounterActions())
-// store.dispatch(decrementCounterActions())
-// store.dispatch(decrementCounterActions())
-// store.dispatch(decrementCounterActions())
-// store.dispatch(decrementCounterActions())
-// store.dispatch(incrementCounterActions())
-// store.dispatch(resetCounterActions())
-store.dispatch(incrementCounterByValue(5))
+
+store.dispatch(addUser("saikoth bin monir "))
+store.dispatch(addUser("santho"))
+store.dispatch(addUser("sihab"))
+store.dispatch(addUser("my fucther gril friend "))
